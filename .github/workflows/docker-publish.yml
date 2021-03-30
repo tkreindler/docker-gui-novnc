@@ -40,6 +40,6 @@ jobs:
           cache-from: type=registry,ref=tkreind/massif-visualizer-novnc:latest
           cache-to: type=inline
           tags: tkreind/massif-visualizer-novnc:latest
-          args:
-            - PACKAGE_NAME=massif-visualizer
-            - EXECUTABLE_NAME=massif-visualizer
+          build-args: |
+            PACKAGE_NAME=massif-visualizer
+            EXECUTABLE_NAME=massif-visualizer
