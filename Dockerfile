@@ -27,7 +27,7 @@ ENV USERID=1000
 ENV GROUPID=1000
 
 RUN groupadd --gid ${GROUPID} app && \
-    useradd --home-dir /data --shell /bin/bash --uid ${USERID} --gid 1000 app && \
+    useradd --home-dir /data --shell /bin/bash --uid ${USERID} --gid ${GROUPID} app && \
     mkdir -p /data
 VOLUME /data
 
