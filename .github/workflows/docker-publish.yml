@@ -31,8 +31,7 @@ jobs:
           username: tkreind
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
-        id: docker_build
+        name: Build and push massif-visualizer
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -43,3 +42,14 @@ jobs:
           build-args: |
             PACKAGE_NAME=massif-visualizer
             EXECUTABLE_NAME=massif-visualizer
+      -
+        name: Build and push gimp
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=registry,ref=tkreind/gimp-novnc:latest
+          cache-to: type=inline
+          tags: tkreind/gimp-novnc:latest
+          build-args: |
+            PACKAGE_NAME=gimp
