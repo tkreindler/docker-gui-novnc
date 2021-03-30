@@ -37,6 +37,6 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,tkreind/massif-visualizer-novnc:latest
+          cache-from: type=registry,ref=tkreind/massif-visualizer-novnc:latest
           cache-to: type=inline
           tags: tkreind/massif-visualizer-novnc:latest
