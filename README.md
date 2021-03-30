@@ -1,7 +1,18 @@
 # Massif-Visualizer-Docker-novnc
 An extremely easy to use docker image to run Massif Visualizer on any host through docker and your browser.
 
-
 This repository took heavy help from the guide over at https://www.digitalocean.com/community/tutorials/how-to-remotely-access-gui-applications-using-docker-and-caddy-on-debian-9. Give that guide a look if you'd like an explanation as to what each part does.
 
 Feel free to fork this to use with any other gui application, it's basically as simple as changing the package you install in the Dockerfile from massif-visualizer to anything else, and then changing the app path that supervisord.conf has from /usr/bin/massif-visualizer, to the path of your executable.
+
+## Supported Hosts
+This image and included scripts fully supports and has been tested on Linux, MacOS, and Windows with WSL Docker.
+
+Windows with HyperV Docker, and other OS such as BSDs, have not been tested and are not supported. However if you give them a go I bet it'll work, the basics at least should run anywhere that Docker can be installed.
+
+## Usage
+1. Install docker and make sure it's running correctly on your operating system.
+    * If on Linux make sure the service is running. It's also recommended you add your user to the docker group so it can run without sudo.
+    * If on Windows enable WSL2 and install Docker Desktop, enabling WSL2 features.
+2. Run ./run.sh or .\run.ps1 depending on your operating system.
+3. When done using, run ./stop.sh or .\stop.ps1 depending on your operating system to stop the containers.
