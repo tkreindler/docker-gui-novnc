@@ -39,7 +39,7 @@ fi
 
 echo ""
 
-$SUDO docker run -d --restart=always -v $1:/data -p 8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc tkreind/massif-visualizer-novnc:latest
+$SUDO docker run -d --restart=always -v $1:/data -p 127.0.0.1:8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc tkreind/massif-visualizer-novnc:latest
 
 if [ $? -ne 0 ]; then
 	exit $?
