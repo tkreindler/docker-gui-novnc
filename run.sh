@@ -1,5 +1,40 @@
 #!/bin/env bash
 
-MASSIFDIR=${1:-/tmp/massif-data}
+if [ "$#" -ne 1 ]; then
+	echo "usage: ./run.sh <directory>"
+	exit 1
+fi
 
-docker run --restart=always -v $MASSIFDIR:/data -p 8080:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc massif-visualizer-novnc && docker rm massif-visualizer-novnc
+# default to not use sudo
+SUDO=""
+
+# check docker permissions on Linux
+uname -a | grep Linux > /dev/null
+if [ $? -eq 0 ]; then
+	echo "Detecting OS as Linux"
+	# if not root
+	if [ $UID -ne 0 ]; then
+		# check if user is in docker group
+		id $UID | grep docker > /dev/null
+		if [ $? -ne 0 ]; then
+			echo "User doesn't have permissions to use docker"
+			echo "Asking for sudo password"
+			SUDO=sudo
+		fi
+	fi
+else
+	uname -a | grep Darwin > /dev/null
+	if [ $? -eq 0 ]; then
+		echo "Detecting OS as MacOS"
+	else
+		echo "Unknown OS, proceed with your own knowledge"
+	fi
+fi
+
+echo ""
+
+echo "Hosting massif-visualizer with files from $1 at http://localhost:8087"
+
+$SUDO docker run --restart=always -v $1:/data -p 8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc massif-visualizer-novnc
+
+$SUDO docker rm massif-visualizer-novnc

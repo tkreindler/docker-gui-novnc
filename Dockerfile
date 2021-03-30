@@ -31,6 +31,6 @@ RUN groupadd --gid ${GROUPID} app && \
     mkdir -p /data
 VOLUME /data
 
-CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]
+CMD ["sh", "-c", "exec gosu app supervisord > /dev/null"]
 
 
