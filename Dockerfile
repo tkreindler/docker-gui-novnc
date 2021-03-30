@@ -19,9 +19,9 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
-COPY menu.xml /etc/xdg/openbox/
-COPY rc.xml /etc/xdg/openbox/
-COPY supervisord.conf /etc/
+COPY src/menu.xml /etc/xdg/openbox/
+COPY src/rc.xml /etc/xdg/openbox/
+COPY src/supervisord.conf /etc/
 EXPOSE 8080
 
 ENV USERID=1000

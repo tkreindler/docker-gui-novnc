@@ -41,6 +41,6 @@ echo ""
 
 echo "Hosting massif-visualizer with files from $1 at http://localhost:8087"
 
-$SUDO docker run --restart=always -v $1:/data -p 8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc massif-visualizer-novnc
+$SUDO docker run --restart=always -v $1:/data -p 8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc tkreind/massif-visualizer-novnc:latest
 
 $SUDO docker rm massif-visualizer-novnc
