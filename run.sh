@@ -22,10 +22,16 @@ if [ $? -eq 0 ]; then
 			SUDO=sudo
 		fi
 	fi
+
+	# open in browser after delay
+	sleep 2 && xdg-open http://localhost:8087 > /dev/null &
 else
 	uname -a | grep Darwin > /dev/null
 	if [ $? -eq 0 ]; then
 		echo "Detecting OS as MacOS"
+
+		# open in browser after delay
+		sleep 2 && open http://localhost:8087 > /dev/null &
 	else
 		echo "Unknown OS, proceed with your own knowledge"
 	fi

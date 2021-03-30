@@ -20,6 +20,7 @@ RUN apt-get update -y && \
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY menu.xml /etc/xdg/openbox/
+COPY rc.xml /etc/xdg/openbox/
 COPY supervisord.conf /etc/
 EXPOSE 8080
 
