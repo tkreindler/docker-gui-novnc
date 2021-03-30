@@ -15,7 +15,7 @@ jobs:
     # Use CI environment secrets
     environment: "Continuous Integration"
     
-    name: Push Docker image to Docker Hub
+    name: Push massif-visualizer image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       -
@@ -40,3 +40,6 @@ jobs:
           cache-from: type=registry,ref=tkreind/massif-visualizer-novnc:latest
           cache-to: type=inline
           tags: tkreind/massif-visualizer-novnc:latest
+          args:
+            - PACKAGE_NAME=massif-visualizer
+            - EXECUTABLE_NAME=massif-visualizer
