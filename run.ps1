@@ -9,7 +9,7 @@ if ($?) {
     exit 1
 }
 
-docker run -d --restart=always -v ${data_dir}:/data -p 127.0.0.1:8087:8080 --name=massif-visualizer-novnc tkreind/massif-visualizer-novnc:latest
+docker run -d --restart=always -v ${data_dir}:/data -p 127.0.0.1:8087:8080 --name=massif-visualizer-novnc gimp_docker
 
 # if there was an error quit silently
 if (!$?) {
