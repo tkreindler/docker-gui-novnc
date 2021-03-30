@@ -23,15 +23,15 @@ if [ $? -eq 0 ]; then
 		fi
 	fi
 
-	# open in browser after delay
-	sleep 2 && xdg-open http://localhost:8087 > /dev/null &
+	# define open command
+	OPEN=xdg-open
 else
 	uname -a | grep Darwin > /dev/null
 	if [ $? -eq 0 ]; then
 		echo "Detecting OS as MacOS"
 
-		# open in browser after delay
-		sleep 2 && open http://localhost:8087 > /dev/null &
+		# define open command
+		OPEN=open
 	else
 		echo "Unknown OS, proceed with your own knowledge"
 	fi
@@ -39,8 +39,19 @@ fi
 
 echo ""
 
-echo "Hosting massif-visualizer with files from $1 at http://localhost:8087"
+$SUDO docker run -d --restart=always -v $1:/data -p 8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc tkreind/massif-visualizer-novnc:latest
 
-$SUDO docker run --restart=always -v $1:/data -p 8087:8080 -e USERID=$UID -e GROUPID=$GID --name=massif-visualizer-novnc tkreind/massif-visualizer-novnc:latest
+if [ $? -ne 0 ]; then
+	exit $?
+fi
+
+echo "Hosting massif-visualizer with files from $1 at http://localhost:8087"
+echo "Press control C to quit"
+
+# open the browser after a delay
+sleep 2 && $OPEN http://localhost:8087 > /dev/null &
+
+# reattach to the process so we can kill it
+docker attach massif-visualizer-novnc
 
 $SUDO docker rm massif-visualizer-novnc
