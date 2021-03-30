@@ -10,12 +10,6 @@ on:
     tags:
       - v*
 
-  # Run tests for any PRs.
-  pull_request:
-
-env:
-  DOCKERHUB_USERNAME: tkreind
-
 jobs:
   push_to_registry:
     # Use CI environment secrets
@@ -34,7 +28,7 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: $DOCKERHUB_USERNAME
+          username: tkreind
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
