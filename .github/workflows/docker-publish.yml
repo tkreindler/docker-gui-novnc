@@ -17,26 +17,9 @@ env:
   DOCKERHUB_USERNAME: tkreind
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Test build
-        run: |
-          docker pull tkreind/massif-visualizer-novnc:latest
-          docker build --cache-from tkreind/massif-visualizer-novnc:latest . --file Dockerfile
-
-
   push_to_registry:
     # Use CI environment secrets
     environment: "Continuous Integration"
-
-    # Ensure test job passes before pushing image.
-    needs: test
     
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
