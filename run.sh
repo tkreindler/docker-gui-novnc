@@ -56,4 +56,4 @@ echo "Hosting massif-visualizer with files from $1 at http://localhost:8087"
 echo "Run ./stop.sh to quit"
 
 # open the browser after a delay
-sleep 2 && $OPEN http://localhost:8087 > /dev/null &
+sleep 2 && $OPEN http://localhost:8087 > /dev/null
