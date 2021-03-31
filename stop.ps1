@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 # check if it's already running
 $result = docker ps | Select-String "massif-visualizer-novnc"
 if ($result) {

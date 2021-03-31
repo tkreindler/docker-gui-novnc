@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 param (
     [Parameter(Mandatory=$true)][string]$DataDirectory
 )
@@ -17,7 +19,7 @@ if (!$?) {
 }
 
 Write-Output "Hosting Hosting massif-visualizer with files from $DataDirectory at http://localhost:8087"
-Write-Output "Run ./stop.sh to quit"
+Write-Output "Run .\stop.ps1 to quit"
 
 Start-Sleep -Seconds 2
 Start-Process http://localhost:8087
