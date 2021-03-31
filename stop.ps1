@@ -1,6 +1,6 @@
 # check if it's already running
-$null = docker ps | findstr massif-visualizer-novnc
-if ($?) {
+$result = docker ps | Select-String "massif-visualizer-novnc"
+if ($result) {
     $null = docker stop massif-visualizer-novnc
     $null = docker rm massif-visualizer-novnc
 } else {

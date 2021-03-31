@@ -3,8 +3,8 @@ param (
 )
 
 # check if it's already running
-$null = docker ps | findstr massif-visualizer-novnc
-if ($?) {
+$result = docker ps | Select-String "massif-visualizer-novnc"
+if ($result) {
 	Write-Output "Container is already running, use .\stop.ps1 to stop it"
     exit 1
 }
